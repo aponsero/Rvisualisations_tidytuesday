@@ -39,8 +39,10 @@ bplot2 <- franchise_summary %>% ggplot(aes(x=decade_created)) +
   geom_point(aes(y=n*3,size = n))+
   geom_text(aes(y=n*3, label=round(franchise_summary$n,1)), nudge_y = 20) +
   scale_y_continuous(sec.axis = sec_axis(~ . / 2, name = "number of franchises"))+
-  labs(fill="Categories", y = "revenue (in billion)", x = "year of creation")+
+  labs(fill="Categories", size="number of franchises", y = "revenue (in billion)", x = "year of creation")+
+  ggtitle("revenue and number of media franchises grossing more than 4 billion US$")+
   theme_classic(base_size = 10)
 bplot2
 
-# stacked barplot by owner
+out_file="week27.png"
+ggsave(out_file, width = 20, height = 15, units = "cm")
