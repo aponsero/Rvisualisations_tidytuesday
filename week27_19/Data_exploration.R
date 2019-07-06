@@ -43,4 +43,4 @@ bplot2 <- franchise_summary %>% ggplot(aes(x=decade_created)) +
 bplot2
 
 out_file="week27.png"
-ggsave(out_file, width = 20, height = 15, units = "cm")
+ggsave(out_file, width = 10, height = 7, units = "cm")
