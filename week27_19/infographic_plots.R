@@ -69,11 +69,30 @@ bplot1
 out_file="/Users/aponsero/Documents/Rvisualisations_tidytuesday/week27_19/week27.svg"
 ggsave(out_file, width = 10, height = 7, units = "cm")
 
-#plot owners
+#get count owners
 dis <- media_franchises %>% select(franchise, original_media, owners) %>% distinct() %>% group_by(owners) %>% tally()
 dis
 
-bplot2 <- dis %>% ggplot(aes(x=owners)) + 
-  geom_bar()+
-  theme_classic()
-bplot2
+#pie chart for Winnie, Star wars and Frozen
+myfranchises=c("Winnie the Pooh", "Star Wars","Frozen")
+three <- media_franchises %>% filter(franchise %in% myfranchises) %>% 
+  group_by(franchise) %>% mutate(Percent = revenue / sum(revenue))
+  
+three$franchise_f = factor(three$franchise, 
+                           levels=c("Winnie the Pooh", "Star Wars","Frozen"))
+
+pie <- three %>% ggplot(aes(x = 2, y = Percent, fill = revenue_category)) + 
+  geom_bar(stat = "identity") +
+  coord_polar(theta = "y") +
+  xlim(0.5, 2.5)+
+  facet_grid(facets = . ~ franchise_f)  +
+  theme_classic()+
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid  = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.position = 'bottom') +    
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+pie
