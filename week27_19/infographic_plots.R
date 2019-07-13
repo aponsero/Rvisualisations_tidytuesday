@@ -1,9 +1,9 @@
 library(ggplot2)
 library(tidyverse)
 library(ggthemes)
-library(lubridate)
-library(maps)
 library(svglite)
+library(waffle)
+library(extrafont)
 
 #function to floor the decades
 floor_dec= function(myyear){ 
@@ -86,13 +86,22 @@ pie <- three %>% ggplot(aes(x = 2, y = Percent, fill = revenue_category)) +
   coord_polar(theta = "y") +
   xlim(0.5, 2.5)+
   facet_grid(facets = . ~ franchise_f)  +
-  theme_classic()+
-  theme(
-    axis.text = element_blank(),
-    axis.ticks = element_blank(),
-    panel.grid  = element_blank(),
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
-    legend.position = 'bottom') +    
+  theme_void()+
+  theme(legend.position = 'bottom') +    
   guides(fill = guide_legend(nrow = 2, byrow = TRUE))
 pie
+
+# create waffle plot
+
+font_import()
+# check that Font Awesome is imported
+fonts()[grep("Awesome", fonts())]
+waffle(c(50, 30, 15, 5), rows = 5, title = "Your basic waffle chart")
+
+waffle(c(50, 30, 15, 5), rows = 5, use_glyph = "music", glyph_size = 20, 
+       title = "Look I made an infographic using R!")
+
+parts <- c(`Un-breached\nUS Population` = (318 - 11 - 79), `Premera` = 11, `Anthem` = 79)
+waffle(parts / 10, rows = 3, colors = c("#969696", "#1879bf", "#009bda"),
+  use_glyph = "medkit", size = 8
+) + expand_limits(y = c(0, 4))
