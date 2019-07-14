@@ -7,7 +7,7 @@ and was preprocessed [here](https://sharleenw.rbind.io/post/hamilton_cbc_part_1/
 ## Data exploration (3h)
 A dive into the dataset and getting some first plots.
 
-## Infographics (3h)
+## Infographic (3h)
 Interesting how the import of SVG files from R is not really working. All text is lost and I needed to rewrite the legends by hand. Fun.
 
-[see the infographics](https://github.com/aponsero/Rvisualisations_tidytuesday/blob/master/week25_19/infographics/infographic_week25_19.pdf)
+[see the infographic](https://github.com/aponsero/Rvisualisations_tidytuesday/blob/master/week25_19/infographics/infographic_week25_19.pdf)
