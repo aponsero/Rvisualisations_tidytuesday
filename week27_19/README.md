@@ -5,3 +5,9 @@ The dataset is about media Franchises and is available through [wikipedia](https
 
 ## Data exploration (2h)
 Learn how to deal with two y-axis.
+
+## Infographics (3h)
+Working a bit on the layout and the use of visual queue to help the reading order.
+
+![see the infographics](https://github.com/aponsero/Rvisualisations_tidytuesday/blob/master/week27_19/infography/main_layout.gif)
+
