@@ -62,16 +62,17 @@ simple <- simple %>% mutate_if(is.character,
 
 
 bplot1 <- simple %>% ggplot(aes(x=decade_created, fill=original_media)) + 
+  labs(fill="original media", x="Date of creation", y="Number of franchises")+
   geom_bar()+
   theme_classic()
 bplot1
 
-out_file="/Users/aponsero/Documents/Rvisualisations_tidytuesday/week27_19/week27.svg"
-ggsave(out_file, width = 10, height = 7, units = "cm")
+out_file="/Users/aponsero/Documents/Rvisualisations_tidytuesday/week27_19/week27_1.svg"
+ggsave(out_file, width = 15, height = 7, units = "cm")
 
 #get count owners
 dis <- media_franchises %>% select(franchise, original_media, owners) %>% distinct() %>% group_by(owners) %>% tally()
-dis
+write.table(dis, "/Users/aponsero/Documents/Rvisualisations_tidytuesday/week27_19/owners.txt", sep="\t")
 
 #pie chart for Winnie, Star wars and Frozen
 myfranchises=c("Winnie the Pooh", "Star Wars","Frozen")
@@ -83,6 +84,7 @@ three$franchise_f = factor(three$franchise,
 
 pie <- three %>% ggplot(aes(x = 2, y = Percent, fill = revenue_category)) + 
   geom_bar(stat = "identity") +
+  labs(fill="revenue")+
   coord_polar(theta = "y") +
   xlim(0.5, 2.5)+
   facet_grid(facets = . ~ franchise_f)  +
@@ -91,17 +93,12 @@ pie <- three %>% ggplot(aes(x = 2, y = Percent, fill = revenue_category)) +
   guides(fill = guide_legend(nrow = 2, byrow = TRUE))
 pie
 
+out_file="/Users/aponsero/Documents/Rvisualisations_tidytuesday/week27_19/week27_2.svg"
+ggsave(out_file, width = 20, height = 7, units = "cm")
+
 # create waffle plot
+owners_data<-c("The Walt Disney\nCompany"=17, "Hitotsubashi Group"=14, "Other"=72)
+waffle(owners_data, rows = 5, title = "Main owners of the franchises")
 
-font_import()
-# check that Font Awesome is imported
-fonts()[grep("Awesome", fonts())]
-waffle(c(50, 30, 15, 5), rows = 5, title = "Your basic waffle chart")
-
-waffle(c(50, 30, 15, 5), rows = 5, use_glyph = "music", glyph_size = 20, 
-       title = "Look I made an infographic using R!")
-
-parts <- c(`Un-breached\nUS Population` = (318 - 11 - 79), `Premera` = 11, `Anthem` = 79)
-waffle(parts / 10, rows = 3, colors = c("#969696", "#1879bf", "#009bda"),
-  use_glyph = "medkit", size = 8
-) + expand_limits(y = c(0, 4))
+out_file="/Users/aponsero/Documents/Rvisualisations_tidytuesday/week27_19/week27_3.svg"
+ggsave(out_file, width = 20, height = 7, units = "cm")
