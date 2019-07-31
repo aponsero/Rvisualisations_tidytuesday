@@ -1,0 +1,31 @@
+library(ggplot2)
+library(dplyr)
+library(gganimate)
+library(gapminder)
+library(tidyverse)
+library(lubridate)
+library(extrafont)
+font_import()
+loadfonts()
+
+
+#Load dataset
+game_data <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-07-30/video_games.csv")
+
+#remove data with playtime=0
+data_plot<-game_data %>% filter(! is.na(metascore) &
+                                !is.na(price))
+
+#change date
+
+# static plot 
+data_plot %>% ggplot(aes(x = metascore, y = price, color=owners)) + 
+  labs(y="price", x="metascore",
+       title="price compared to median playtime")+
+  geom_point(size = 3) +
+  theme_minimal(base_size = 16)+
+  theme(text=element_text(family="Times New Roman"),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"))
+

@@ -12,8 +12,8 @@ loadfonts()
 #Load dataset
 r4ds_members <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-07-16/r4ds_members.csv")
 data_plot <- r4ds_members %>% 
-                    select(date, total_membership,daily_active_members,weekly_active_members) %>% 
-                    gather(members, count, -date) 
+  select(date, total_membership,daily_active_members,weekly_active_members) %>% 
+  gather(members, count, -date) 
 
 
 
@@ -46,7 +46,7 @@ my_anim <- data_plot %>% ggplot(aes(x = date, y = count)) +
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black"))+
-# Here comes the gganimate stuff
+  # Here comes the gganimate stuff
   transition_reveal(date,
                     range = as.Date(c("2017-08-27", "2020-01-01")))
 
