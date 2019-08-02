@@ -1,7 +1,6 @@
 library(ggplot2)
 library(dplyr)
 library(gganimate)
-library(gapminder)
 library(tidyverse)
 library(lubridate)
 library(extrafont)
